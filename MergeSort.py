@@ -38,8 +38,8 @@ def mergesort(A):
     if len(A) <= 1:
         return A
     p = 0
-    q = len(A)-1
-    r = (p+q)/2
+    q = len(A) - 1
+    r = (p+q) / 2
     left = mergesort(A[p:r+1])
     right = mergesort(A[r+1:q+1])
     return merge(left, right)
