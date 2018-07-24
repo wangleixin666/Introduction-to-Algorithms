@@ -47,7 +47,7 @@ def build_max_heap(array):
     # 建立最大堆的时间复杂度是O(n)
     heap_size = len(array)
     for i in range((heap_size - 1)/2, -1, -1):
-        # 从 (length - 1)/2 到 1 建立堆
+        # 从 (length - 1)/2 到 0 建立堆
         # 节点0就是最大堆的根节点，值是array[0]
         max_heapify(array, i, heap_size)
 
@@ -56,7 +56,7 @@ def heapsort(array):
     build_max_heap(array)
     heap_size = len(array)
     for i in range(len(array) - 1, 0, -1):
-        # 这里都是下标，所以是从0到len-1
+        # 这里都是下标，所以是从1到len-1，而下标为0的不用进行下一步的操作
         array[0], array[i] = array[i], array[0]
         heap_size -= 1
         max_heapify(array, 0, heap_size)
