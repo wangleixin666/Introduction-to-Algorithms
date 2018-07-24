@@ -18,6 +18,7 @@ def matrix_multiply(A, B):
 
 
 def matrix_multiply_1(A, B):
+    # 存在bug，并不是正确的代码！！！
     # 采用分治的思路，如果矩阵的规模大于等于2，把矩阵分解成为4个n/2的子矩阵相乘，然后求和
     n = len(A)
     m = int(n/2)
