@@ -64,9 +64,65 @@ def find_max_subarray(a, low, mid, high):
     return max_left, max_right, left_sum+right_sum
 
 
+"""
+动态规划策略：
+
+从后往前分析：考虑加入第n的元素a[n]后的数组a[0--n]的最大子数组与加入前的数组a[0--n-1]的最大子数组之间的关系，找到状态转移的方程
+
+它们的关系可能如下两种情况，
+1.数组a[0--n]的最大子数组以a[n]元素结尾，可能由单个a[n]元素组成；
+2.数组a[0--n]的最大子数组与a[n]无关，与数组a[0--n-1]的最大子数组相同。
+
+若我们存储以a[n]元素结尾的最大子数组状态为end[n]，数组a[0--n]的最大子数组的状态为all[n]，
+
+则得出状态转移方程如下:
+
+end[n] = max(end[n-1] + array[n], array[n]);
+all[n] = max(all[n-1], end[n]);
+
+时间复杂度：只设计一次遍历：T(n)=O(n)。
+"""
+
+
+def max_subarray_2(array):
+    end = []
+    all = []
+    end.append(float('-inf'))
+    all.append(float('-inf'))
+    for i in range(1, len(array)):
+        end.append(max(end[i-1]+array[i-1], array[i-1]))
+        all.append(max(end[i], all[i-1]))
+        # 根据状态方程可以写出来，然后初始值为-inf
+    print all
+    return all[-1]
+
+
+"""
+  # 因为最大子列表一定是从一个非0的数开始的（假定列表中有正数有负数）
+  # 所以就可以暂时筛选调小于0的数，即便列表全是负数，那么最大的子列表肯定是负数最大的一个
+"""
+
+
+def max_subarray_3(array):
+    max_sum = array[0]
+    pre_sum = 0
+    # 临时的数组和，为负时重新开始
+    for i in array:
+        if pre_sum < 0:
+            pre_sum = i
+        else:
+            pre_sum += i
+        if pre_sum > max_sum:
+            max_sum = pre_sum
+            # 更新最大子数组和
+    return max_sum
+
+
 if __name__ == "__main__":
-    a = [2, -1, 8, -3, 6, 0, 1]
+    a = [1, -2, 3, 10, -4, 7, 2, -5]
     low = 0
     high = len(a) - 1
-    print max_subarray_1(a, low, high)
-    print max_subarray(a)
+    # print max_subarray_1(a, low, high)
+    # print max_subarray(a)
+    print max_subarray_2(a)
+    print max_subarray_3(a)
