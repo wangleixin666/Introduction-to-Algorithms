@@ -66,6 +66,7 @@ def heapsort(array):
 # 迭代方式替换递归
 def max_heapify_iter(A, i, heap_size):
     while True:
+        # 否则就迭代进行维护最大堆的操作
         l = left(i)
         r = right(i)
         if l < heap_size and A[l] > A[i]:
@@ -78,6 +79,7 @@ def max_heapify_iter(A, i, heap_size):
             A[largest], A[i] = A[i], A[largest]
             i = largest
         else:
+            # 也就是说插入的节点刚好最大，然后就不用向下进行更新最大堆的操作了
             break
 
 """ 来源于：https://blog.csdn.net/zhang_xiaomeng/article/details/71703345 """
