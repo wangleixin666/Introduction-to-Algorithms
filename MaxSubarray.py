@@ -85,15 +85,14 @@ all[n] = max(all[n-1], end[n]);
 
 
 def max_subarray_2(array):
-    end = []
-    all = []
-    end.append(float('-inf'))
-    all.append(float('-inf'))
-    for i in range(1, len(array)):
-        end.append(max(end[i-1]+array[i-1], array[i-1]))
-        all.append(max(end[i], all[i-1]))
+    end = [None for i in range(len(array)+1)]
+    all = [None for i in range(len(array)+1)]
+    end[0] = float('-inf')
+    all[0] = float('-inf')
+    for i in range(1, len(array)+1):
+        end[i] = max(end[i-1]+array[i-1], array[i-1])
+        all[i] = max(end[i], all[i-1])
         # 根据状态方程可以写出来，然后初始值为-inf
-    print all
     return all[-1]
 
 
@@ -119,7 +118,7 @@ def max_subarray_3(array):
 
 
 if __name__ == "__main__":
-    a = [1, -2, 3, 10, -4, 7, 2, -5]
+    a = [2,8,1,5,9]
     low = 0
     high = len(a) - 1
     # print max_subarray_1(a, low, high)
