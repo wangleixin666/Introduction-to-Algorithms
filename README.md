@@ -17,7 +17,7 @@
     
     熟悉了算法的流程，也加深了印象，提高了编程能力
     
-    talking is cheap, show me coding
+    talk is cheap, show me the code
 
 安排：
 
