@@ -120,12 +120,34 @@ def quicksort_3(arr):
             stack.append(index + 1)
 
 
+def quicksort_4(arr, low, high):
+    # 感觉交换的次数变多了，而且结果不太准确？？
+    # 28, 16, 32, 12, 60, 2, 5, 72
+    # [5, 16, 2, 12, 28, 60, 32, 72]
+    i = low
+    j = high
+    if i >= j:
+        return arr
+    key = arr[i]
+    while i < j:
+        while i < j and arr[j] >= key:
+            j = j - 1
+        arr[i] = arr[j]
+        while i < j and arr[i] <= key:
+            i = i + 1
+        arr[j] = arr[i]
+    arr[i] = key
+    quicksort_4(arr, low, i - 1)
+    quicksort_4(arr, j + 1, high)
+
+
+
 if __name__ == "__main__":
-    a = [2, 1, 3, 5, 7, 4]
+    a = [28, 16, 32, 12, 60, 2, 5, 72]
     # quicksort(a, 0, 5)
     # print a
     # quicksort_2(a, 0, 5)
-    quicksort_3(a)
+    quicksort_4(a, 0, 7)
     print a
 
 
